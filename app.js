@@ -1,18 +1,18 @@
 import { v4 } from 'uuid';
-
-let arr =[]
-let wepone = {
-    id:v4(),
-    type :"m16",
-    status:false,
-    active:true
+import fs from 'fs/promises';
+const retwepones = async () => {
+    const data = await fs.readFile('./Data.json', 'utf8');
+    // console.log(data);
+    
+    return JSON.parse(data); 
 }
-arr.push(wepone)
 
-const retwepones = ()=>{
-    return arr
+const retweponesByID = async (id) => {
+    const data = await retwepones();
+    return data.some(item => item.id === id); 
 }
-console.log(arr);
+
 export{
+    retweponesByID,
     retwepones
 }
